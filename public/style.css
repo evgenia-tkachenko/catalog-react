@@ -1,0 +1,53 @@
+#root {
+	width: 960px;
+	background: oldlace;
+	margin: 0 auto;
+	font-family: 'Alegreya Sans SC', sans-serif;
+	font-size: 20px;
+}
+
+.hide {
+	display: none;
+}
+
+.title {
+	width: 100%;
+	height: 100px;
+	text-align: center;
+	font-style: italic;
+	line-height: 100px;
+	font-size: 35px;
+}
+
+nav {
+	height: 64px;
+}
+
+.menu {
+	width: 50%;
+	background: sienna;
+	text-align: center;
+	float: left;
+}
+
+.menu a {
+	color: white;
+	text-decoration: none;
+}
+
+.link {
+	width: 100%;
+	padding: 20px 0;
+}
+
+.link:hover {
+	background: sandybrown;
+}
+
+.content {
+	padding: 50px;
+}
+
+footer {
+	padding: 0 20px 20px 20px;
+}
