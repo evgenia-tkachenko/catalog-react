@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Action from './actions';
 
 class Item extends Component {
@@ -20,6 +20,22 @@ class Item extends Component {
             )
         });
 
+        let catInput = "";
+        if(this.props.propCategory) {
+            catInput = 
+                <Fragment>
+                    <b>Категория:</b>
+                    <select 
+                        className="form-control" 
+                        value={this.state.currentCategory}
+                        onChange={ (e) => this.setState({currentCategory: e.target.value}) }
+                    >
+                            {categoriesList}
+                    </select>
+                    <br />
+                </Fragment>
+        }
+
         return (
             <div className="form-group">
                 <label htmlFor="goodNameEdit"><b>Наименование:</b></label>
@@ -32,15 +48,7 @@ class Item extends Component {
                     onChange={ (e) => this.setState( {currentName: e.target.value} ) }
                 /> 
                 <br />
-                <b>Категория:</b>
-                <select 
-                    className="form-control" 
-                    value={this.state.currentCategory}
-                    onChange={ (e) => this.setState({currentCategory: e.target.value}) }
-                >
-                        {categoriesList}
-                </select>
-                <br />
+                {catInput}
                 <button 
                     id="addBtn" 
                     className="btn btn-primary"
