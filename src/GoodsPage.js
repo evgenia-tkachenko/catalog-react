@@ -103,6 +103,14 @@ class GoodsPage extends Component {
         Action.setData(newArr, "goods");
     }
 
+    saveItem(index, newName, newCategory) {
+        let newArr = this.state.goodsData;
+        newArr[index].name = newName;
+        newArr[index].category = newCategory;
+        this.setState( {goodsData: newArr} );
+        Action.setData(newArr, "goods");
+    }
+
     render() {
 
         let output = this.state.goodsData.map( (item, index) => {
@@ -111,6 +119,7 @@ class GoodsPage extends Component {
                     key={item.id} 
                     index={index}
                     deleteItem={this.deleteItem.bind(this)}
+                    saveItem={this.saveItem.bind(this)}
                     propName={item.name} 
                     propCategory={item.category}
                 />
