@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Action from './actions';
+import uid from 'uid';
 import Item from './Item';
 
 class GoodsPage extends Component {
@@ -36,30 +37,34 @@ class GoodsPage extends Component {
     }
 
     generateInput() {
-        let categoriesList = Action.getData("categories").map( (item) => {
+        let categoriesList = Action.getData("categories").map( (item, index) => {
             return (
-                <option value={item.name}>{item.name}</option>
+                <option key={index} value={item.name}>{item.name}</option>
             )
         });
 
         return (
-            <div>
-                <b>Наименование:</b>
+            <div className="form-group">
+                <label htmlFor="goodNameInp"><b>Наименование:</b></label>
                 <input 
                     type="text" 
                     placeholder="Товар" 
-                    className="nameInp"
+                    className="form-control"
+                    id="goodNameInp"
+                    required="required"
                     value={this.state.currentName}
                     onChange={this.getText.bind(this, "name")}
-                /> <br />
+                /> 
+                <br />
                 <b>Категория:</b>
-                <select onChange={this.getText.bind(this, "category")}>
-                    <option hidden value={this.state.currentCategory}></option>
+                <select className="form-control" onChange={this.getText.bind(this, "category")}>
+                    <option hidden key={-1} value={this.state.currentCategory}></option>
                     {categoriesList}
                 </select>
                 <br />
                 <button 
                     id="addBtn" 
+                    className="btn btn-primary"
                     onClick={this.handleClick.bind(this)}>
                     Добавить
                 </button>
@@ -81,12 +86,12 @@ class GoodsPage extends Component {
         let tempArr = this.state.goodsData;
 
         tempArr.push( {
-            id: "",
+            id: uid(10),
             name: this.state.currentName,
             category: this.state.currentCategory
         });
 
-        this.setState( {goodsData: tempArr, currentName: "", currentCategory: ""} );
+        this.setState( {goodsData: tempArr, currentName: ""} );
 
         Action.setData(tempArr, "goods");
     }
@@ -102,6 +107,8 @@ class GoodsPage extends Component {
                 />
             )
         });
+
+        console.log(output);
 
         let inputField = "";
         if(this.state.showInput) {

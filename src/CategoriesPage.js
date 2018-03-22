@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Action from './actions';
+import uid from 'uid';
 import Item from './Item';
 
 class CategoriesPage extends Component {
@@ -38,17 +39,18 @@ class CategoriesPage extends Component {
     generateInput() {
 
         return (
-            <div>
+            <div className="form-group">
                 <b>Наименование:</b>
                 <input 
                     type="text" 
-                    placeholder="Товар" 
-                    className="nameInp"
+                    placeholder="Категория" 
+                    className="form-control"
                     value={this.state.currentName}
                     onChange={this.getText.bind(this)}
                 /> <br />
                 <button 
                     id="addBtn" 
+                    className="btn btn-primary"
                     onClick={this.handleClick.bind(this)}>
                     Добавить
                 </button>
@@ -65,7 +67,7 @@ class CategoriesPage extends Component {
         let tempArr = this.state.categoriesData;
 
         tempArr.push( {
-            id: "",
+            id: uid(10),
             name: this.state.currentName,
         });
 

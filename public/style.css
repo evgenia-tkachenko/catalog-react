@@ -62,3 +62,31 @@ footer {
 	text-align: center;
 	float: left;
 }
+
+.showBtn {
+	border: 1px solid sienna;
+	border-radius: 7px;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.showBtn:hover {
+	font-weight: bold;
+}
+
+.form-group {
+	border: 1px solid sienna;
+	border-radius: 0 0 7px 7px;
+	border-top: none;
+	padding: 10px;
+}
+
+.btn-primary {
+	background: sandybrown;
+	border-color: sienna;
+}
+
+.btn-primary:hover {
+	background: sienna;
+	border-color: sandybrown;
+}
