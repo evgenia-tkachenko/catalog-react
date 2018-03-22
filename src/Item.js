@@ -20,6 +20,7 @@ class Item extends Component {
                 <div>
                     {this.state.currentCategory}
                 </div>
+                <div className="bin" onClick={ () => this.props.deleteItem(this.props.index) }>Удалить</div>
             </div>
         )
     }

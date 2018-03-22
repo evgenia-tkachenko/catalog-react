@@ -83,17 +83,24 @@ class GoodsPage extends Component {
 
     handleClick() {
     
-        let tempArr = this.state.goodsData;
+        let newArr = this.state.goodsData;
 
-        tempArr.push( {
+        newArr.push( {
             id: uid(10),
             name: this.state.currentName,
             category: this.state.currentCategory
         });
 
-        this.setState( {goodsData: tempArr, currentName: ""} );
+        this.setState( {goodsData: newArr, currentName: ""} );
 
-        Action.setData(tempArr, "goods");
+        Action.setData(newArr, "goods");
+    }
+
+    deleteItem(index) {
+        let newArr = this.state.goodsData;
+        newArr.splice(index, 1);
+        this.setState( {goodsData: newArr} );
+        Action.setData(newArr, "goods");
     }
 
     render() {
@@ -102,6 +109,8 @@ class GoodsPage extends Component {
             return (
                 <Item 
                     key={item.id} 
+                    index={index}
+                    deleteItem={this.deleteItem.bind(this)}
                     propName={item.name} 
                     propCategory={item.category}
                 />

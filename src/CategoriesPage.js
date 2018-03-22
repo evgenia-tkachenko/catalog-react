@@ -76,12 +76,21 @@ class CategoriesPage extends Component {
         Action.setData(tempArr, "categories");
     }
 
+    deleteItem(index) {
+        let newArr = this.state.categoriesData;
+        newArr.splice(index, 1);
+        this.setState( {categoriesData: newArr} );
+        Action.setData(newArr, "categories");
+    }
+
     render() {
 
         let output = this.state.categoriesData.map( (item, index) => {
             return (
                 <Item 
                     key={item.id} 
+                    index={index}
+                    deleteItem={this.deleteItem.bind(this)}
                     propName={item.name} 
                 />
             )
