@@ -10,6 +10,11 @@ const Action = {
 	setData: function(dataArr, data) {
 		var finalArr = JSON.stringify(dataArr);
 		localStorage[data] = finalArr;
+	},
+
+	validateData(data) {
+		if(data.length > 0 && typeof(data) === "string") return true;
+		else return false;
 	}
 }
 

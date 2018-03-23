@@ -11,7 +11,8 @@ class GoodsPage extends Component {
             goodsData: [],
             showInput: false,
             currentName: "",
-            currentCategory: ""
+            currentCategory: "",
+            isError: false
         }
     }
 
@@ -43,8 +44,14 @@ class GoodsPage extends Component {
             )
         });
 
+        let errors = "";
+        if(this.state.isError) {
+            errors = <div className="bg-danger">Некорректный ввод</div>;
+        }
+
         return (
             <div className="form-group">
+                {errors}
                 <label htmlFor="goodNameInp"><b>Наименование:</b></label>
                 <input 
                     type="text" 
@@ -65,6 +72,7 @@ class GoodsPage extends Component {
                 <button 
                     id="addBtn" 
                     className="btn btn-primary"
+                    ref={(btn) => { this.addBtn = btn; }}
                     onClick={this.handleClick.bind(this)}>
                     Добавить
                 </button>
@@ -82,18 +90,26 @@ class GoodsPage extends Component {
     }
 
     handleClick() {
-    
-        let newArr = this.state.goodsData;
 
-        newArr.push( {
-            id: uid(10),
-            name: this.state.currentName,
-            category: this.state.currentCategory
-        });
+        if(Action.validateData(this.state.currentName) && Action.validateData(this.state.currentCategory)) {
+            let newArr = this.state.goodsData;
 
-        this.setState( {goodsData: newArr, currentName: ""} );
+            newArr.push( {
+                id: uid(10),
+                name: this.state.currentName,
+                category: this.state.currentCategory
+            });
 
-        Action.setData(newArr, "goods");
+            this.setState( {goodsData: newArr, currentName: ""} );
+            this.setState({isError: false});
+            
+            Action.setData(newArr, "goods");
+        }
+        
+        else{
+            this.setState({isError: true});
+        }
+        
     }
 
     deleteItem(index) {
